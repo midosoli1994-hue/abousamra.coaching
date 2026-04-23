@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coach Mohamed Samir | Professional Coaching</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root { --primary: #d1fa1e; --bg: #050505; }
+        body { background: var(--bg); color: white; font-family: 'Segoe UI', sans-serif; overflow-x: hidden; }
+        .page { display: none; min-height: 100vh; padding-top: 80px; }
+        .active { display: block; animation: fadeIn 0.5s ease; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .video-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1; opacity: 0.4; }
+    </style>
+</head>
+<body>
+
+    <nav class="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-md border-b border-white/10 px-6 py-4 flex justify-between items-center">
+        <div class="text-xl font-black accent-text uppercase tracking-tighter">COACH <span style="color:var(--primary)">SAMIR</span></div>
+        <div class="hidden md:flex gap-6 text-sm font-bold uppercase">
+            <button onclick="showPage('home')">الرئيسية</button>
+            <button onclick="showPage('certs')">شهاداتي</button>
+            <button onclick="showPage('results')">التحولات</button>
+            <button onclick="showPage('contact')">تواصل وتقييم</button>
+        </div>
+        <button onclick="toggleAdmin()" class="bg-zinc-800 p-2 rounded text-[10px]">ADMIN</button>
+    </nav>
+
+    <section id="home" class="page active relative flex flex-col justify-center items-center text-center">
+        <video class="video-bg" autoplay muted loop playsinline id="hero-video">
+            <source src="your-video-link.mp4" type="video/mp4">
+        </video>
+        <h1 id="hero-title" class="text-5xl md:text-8xl font-black italic mb-4">LEAVE NO LIMITS</h1>
+        <p class="text-gray-400 max-w-xl mb-8">استعرض مهاراتي في التدريب وبناء الأجسام بأعلى المعايير.</p>
+        <div class="flex gap-4">
+            <div class="bg-white/10 p-4 rounded-xl border border-white/10">التدريب أونلاين</div>
+            <div class="bg-white/10 p-4 rounded-xl border border-white/10">تخطيط التغذية</div>
+        </div>
+    </section>
+
+    <section id="certs" class="page px-6 max-w-7xl mx-auto">
+        <h2 class="text-4xl font-black mb-12 italic text-center">الاعتمادات والشهادات</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="certs-grid">
+            </div>
+    </section>
+
+    <section id="results" class="page px-6 max-w-7xl mx-auto">
+        <h2 class="text-4xl font-black mb-12 italic text-center">قصص نجاح الأبطال</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8" id="results-grid">
+            </div>
+    </section>
+
+    <section id="contact" class="page px-6 max-w-4xl mx-auto text-center">
+        <h2 class="text-4xl font-black mb-12 italic">تواصل وقيم تجربتك</h2>
+        <div class="bg-zinc-900 p-8 rounded-3xl mb-12">
+            <input type="text" placeholder="اسمك" class="w-full bg-black mb-4 p-4 rounded-xl">
+            <textarea placeholder="رأيك في التدريب" class="w-full bg-black mb-4 p-4 rounded-xl"></textarea>
+            <button class="w-full py-4 rounded-xl font-bold bg-[#d1fa1e] text-black">إرسال التقييم</button>
+        </div>
+    </section>
+
+    <div id="admin-panel" class="fixed inset-0 bg-black z-[100] hidden p-10">
+        <h2 class="text-2xl font-bold mb-6 text-[#d1fa1e]">لوحة تحكم الكوتش سمير</h2>
+        <div class="space-y-4 max-w-md">
+            <input id="input-video" type="text" placeholder="رابط فيديو الواجهة" class="w-full p-3 bg-zinc-800">
+            <input id="input-title" type="text" placeholder="العنوان الرئيسي" class="w-full p-3 bg-zinc-800">
+            <button onclick="saveAll()" class="w-full bg-[#d1fa1e] text-black py-3 rounded font-bold">حفظ ونشر التعديلات</button>
+            <button onclick="toggleAdmin()" class="w-full border border-red-500 py-3 rounded">إغلاق</button>
+        </div>
+    </div>
+
+    <script>
+        function showPage(id) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+        }
+        function toggleAdmin() {
+            document.getElementById('admin-panel').classList.toggle('hidden');
+        }
+        function saveAll() {
+            const v = document.getElementById('input-video').value;
+            const t = document.getElementById('input-title').value;
+            if(v) document.getElementById('hero-video').src = v;
+            if(t) document.getElementById('hero-title').innerText = t;
+            alert('تم التحديث!');
+            toggleAdmin();
+        }
+    </script>
+</body>
+</html>
